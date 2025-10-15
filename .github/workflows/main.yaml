@@ -9,24 +9,13 @@ on:
     branches:
       - main
 
-<<<<<<< HEAD
-
-  workflow_dispatch:
-
-  schedule:
-    - cron: '10 14 * * 1-5'  # At 14:10 on every day-of-week from Monday through Friday.   
-
-
-  permissions:
-    contents: read
-=======
   workflow_dispatch:
 
   schedule:
     - cron: "10 14 * * 1-5" # At 14:10 on every day-of-week from Monday through Friday.
 
-
->>>>>>> 2872095da1a50053c83bed630b8dfdc2d8a64b63
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -41,10 +30,10 @@ jobs:
         run: mvn install
 
       - name: Upload Build Artifacts
-       uses: actions/upload-artifact@v4
-       with:
-         name: vprofile-app
-         path: target/*.war
+        uses: actions/upload-artifact@v4
+        with:
+          name: vprofile-app
+          path: target/*.war
 
       - name: Notify Build Fails
         if: failure()
@@ -55,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
