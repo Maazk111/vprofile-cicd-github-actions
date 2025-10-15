@@ -5,6 +5,20 @@ on:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: '10 14 * * 1-5'  # At 14:10 on every day-of-week from Monday through Friday.   
+
+
+  permissions:
+    contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,6 +28,16 @@ jobs:
 
       - name: Maven Build
         run: mvn install
+
+      - name: Upload Build Artifacts
+       uses: actions/upload-artifact@v4
+       with:
+         name: vprofile-app
+         path: target/*.war
+
+      - name: Notify Build Fails
+        if: failure()
+        run: echo "Build failed! Please check the logs."
 
   testing:
     needs: build
