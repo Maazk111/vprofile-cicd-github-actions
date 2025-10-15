@@ -5,12 +5,25 @@ on:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "10 14 * * 1-5" # At 14:10 on every day-of-week from Monday through Friday.
+
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Maven Build
         run: mvn install
@@ -21,6 +34,8 @@ jobs:
     steps:
       - name: Code Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Maven Test
         run: mvn test
