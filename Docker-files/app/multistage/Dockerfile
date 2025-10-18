@@ -1,12 +1,13 @@
-FROM maven:3.9.9-eclipse-temurin-21-jammy AS BUILD_IMAGE
-RUN git clone https://github.com/hkhcoder/vprofile-project.git
-RUN cd vprofile-project && git checkout docker && mvn install
+# Stage 1: Build Stage
+FROM maven:3.9.6-eclipse-temurin-17 AS build-image
 
-FROM tomcat:10-jdk21
+# Copy everything from current directory into /app inside container
+COPY . /app
+WORKDIR /app
 
-RUN rm -rf /usr/local/tomcat/webapps/*
+# Build the artifact using Maven
+RUN mvn install
 
-COPY --from=BUILD_IMAGE vprofile-project/target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
-
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+# Stage 2: Runtime Stage
+FROM tomcat:10.1.15-jdk17
+COPY --from=build-image /app/target/vprofile-v2.war /usr/local/tomcat/webapps/
