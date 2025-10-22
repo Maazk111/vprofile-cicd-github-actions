@@ -1,16 +1,16 @@
-# ⚙️ GitHub Actions — CI/CD Pipeline for VProfile App
+# ⚙️ GitHub Actions — DevSecOps CI/CD Pipeline for VProfile App
 
 ## 📘 Overview
-This project demonstrates how to **build, test, scan, and deploy** a Java-based web application using **GitHub Actions CI/CD**.  
-It automates the DevOps workflow from **source code commit → artifact creation → security scan → Docker image push → AWS ECR**.
+This project demonstrates a complete **CI/CD pipeline implementation in GitHub Actions** for the **VProfile Java-based web application**.  
+The pipeline automates every stage — from **code build, testing, security scanning, and artifact management** to **Docker image creation and publishing** — leveraging **GitHub’s integrated DevSecOps ecosystem**.
 
 The purpose of this repository is to showcase:
-- 💡 **CI/CD Automation Skills** using GitHub Actions
-- 🔐 **DevSecOps Practices** (Trivy vulnerability scanning)
-- ☁️ **Cloud Integration** with AWS (ECR for container images)
-- 🧩 **Workflow Design & Error Debugging**
 
----
+- 💡 **GitHub Actions workflow automation skills**
+- 🔐 **DevSecOps best practices** (Trivy vulnerability scanning, security checks)
+- 🐳 **Docker image build & publish** using GitHub Container Registry or AWS ECR
+- ☁️ **Cloud-ready, multi-stage pipeline design** with secure parallel execution
+
 
 ## 🏗️ Architecture Diagram
 <p align="center">
